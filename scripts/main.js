@@ -20,5 +20,6 @@
     });
 
     formHandler.addInputHandler(Validation.isCompanyEmail);
+    formHandler.addCoffeeandSliderHandler(Validation.decafCheck);
 
 })(window);

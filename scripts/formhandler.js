@@ -42,6 +42,38 @@
 
             });
         };
+
+        FormHandler.prototype.addCoffeeandSliderHandler = function(fn) {
+            console.log('Setting input handler for coffee order and slider');
+            //handler for order field
+            this.$formElement.on('input', '[name="coffee"]', function(event) {
+                var order = event.target.value;
+                //get the value of the caffeine slider
+                var strength = $('[name="strength"]').val();
+                var message = '';
+                if (fn(order, strength)) {
+                    event.target.setCustomValidity('');
+                } else {
+                    message = 'decaf should have a strength level of 20 or less!';
+                    event.target.setCustomValidity(message);
+                }
+            });
+            //handler for slider
+            this.$formElement.on('change', '[name="strength"]', function(event) {
+                var strength = event.target.value;
+                var order = $('[name="coffee"]').val();
+                console.log(order);
+                console.log(strength);
+                var message = '';
+                if (fn(order, strength)) {
+                    event.target.setCustomValidity('');
+                } else {
+                    message = 'decaf should have a strength level of 20 or less!';
+                    event.target.setCustomValidity(message);
+                }
+            });
+
+        };
     }
     App.FormHandler = FormHandler;
     window.App = App;
